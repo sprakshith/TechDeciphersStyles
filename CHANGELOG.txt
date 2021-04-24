@@ -12,3 +12,6 @@ Change Log
 0.0.3 (24-04-2021)
 ------------------
 - Adding CSS and Palette Code. Vertical and Horizontal Descriptive Plot.
+
+0.0.4 (25-04-2021)
+- Fixed Importing issue. Refactored CSS Code.

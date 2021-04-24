@@ -4,14 +4,24 @@ from IPython.core.display import HTML
 
 
 def load_css(theme=None):
+    response_main = req.urlopen(
+        'https://raw.githubusercontent.com/sprakshith/TechDeciphersStyles/main/static/main.css')
+
     if theme == 'cyan_sisters':
-        response = req.urlopen(
+        response_theme = req.urlopen(
             'https://raw.githubusercontent.com/sprakshith/TechDeciphersStyles/main/static/cyan_sisters.css')
-        return HTML('<style>' + response.read().decode('utf-8') + '</style>')
+        return HTML('<style>' + response_main.read().decode('utf-8') +
+                    response_theme.read().decode('utf-8') + '</style>')
+    if theme == 'dark_matter':
+        response_theme = req.urlopen(
+            'https://raw.githubusercontent.com/sprakshith/TechDeciphersStyles/main/static/cyan_sisters.css')
+        return HTML('<style>' + response_main.read().decode('utf-8') +
+                    response_theme.read().decode('utf-8') + '</style>')
     else:
-        response = req.urlopen(
+        response_theme = req.urlopen(
             'https://raw.githubusercontent.com/sprakshith/TechDeciphersStyles/main/static/cyan_sisters.css')
-        return HTML('<style>' + response.read().decode('utf-8') + '</style>')
+        return HTML('<style>' + response_main.read().decode('utf-8') +
+                    response_theme.read().decode('utf-8') + '</style>')
 
 
 def get_color_palette(theme=None):

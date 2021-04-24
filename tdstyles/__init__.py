@@ -1,2 +1,2 @@
-import style_css
-import easy_plots
+from . import style_css
+from . import easy_plots
