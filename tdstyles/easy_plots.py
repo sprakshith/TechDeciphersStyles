@@ -1,8 +1,13 @@
 import matplotlib.pyplot as plt
 import matplotlib.lines as lines
+from . import style_css
 
 
-def descriptive_plot(figsize=(8, 6), line_pos_x_axis=1, background_color='#fbfbfb'):
+def descriptive_plot(figsize=(8, 6), line_pos_x_axis=1, background_color=None):
+
+    if background_color is None:
+        background_color = style_css.get_background_color()
+
     fig, ax = plt.subplots(1, 1, figsize=figsize, facecolor=background_color)
 
     ax.set_facecolor(background_color)
@@ -14,9 +19,12 @@ def descriptive_plot(figsize=(8, 6), line_pos_x_axis=1, background_color='#fbfbf
     return ax
 
 
-def vertical_descriptive_plot(figsize=(6, 8), plots=3, plot_height=0.5, plot_width=0.75, background_color='#fbfbfb'):
+def vertical_descriptive_plot(figsize=(6, 8), plots=3, plot_height=0.5, plot_width=0.75, background_color=None):
     if plot_width > 1.4:
         raise Exception('Plot width cannot be greater than 1.5')
+
+    if background_color is None:
+        background_color = style_css.get_background_color()
 
     fig = plt.figure(figsize=figsize, facecolor='#fbfbfb')
     axes = []
@@ -37,7 +45,7 @@ def vertical_descriptive_plot(figsize=(6, 8), plots=3, plot_height=0.5, plot_wid
 
 
 def horizontal_descriptive_plot(figsize=(8, 6), plots=3, plot_height=0.75, line_pos_y_axis=-0.1,
-                                background_color='#fbfbfb'):
+                                background_color=None):
     if plots not in [2, 3, 4]:
         raise Exception('Number of plots must be 2, 3 or 4')
 
@@ -46,6 +54,9 @@ def horizontal_descriptive_plot(figsize=(8, 6), plots=3, plot_height=0.75, line_
 
     # Plot width based on number of plots required
     plot_width = {2: 0.9, 3: 0.6, 4: 0.43}
+
+    if background_color is None:
+        background_color = style_css.get_background_color()
 
     fig = plt.figure(figsize=figsize, facecolor='#fbfbfb')
     axes = []

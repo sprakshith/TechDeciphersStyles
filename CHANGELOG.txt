@@ -14,4 +14,9 @@ Change Log
 - Adding CSS and Palette Code. Vertical and Horizontal Descriptive Plot.
 
 0.0.4 (25-04-2021)
+------------------
 - Fixed Importing issue. Refactored CSS Code.
+
+0.0.5 (25-04-2021)
+------------------
+- Added New Theme 'Dark Matter'
