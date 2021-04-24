@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
     name='tdstyles',
-    version='0.0.1',
+    version='0.0.3',
     description='A python package which helps in customizing a jupyter notebook with very less effort.',
     long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
     url='https://sprakshith.pythonanywhere.com/',
@@ -20,5 +20,5 @@ setup(
     classifiers=classifiers,
     keywords='matplotlib pyplot seaborn plt sns',
     packages=find_packages(),
-    install_requires=['matplotlib', 'IPython']
+    install_requires=['matplotlib', 'IPython', 'seaborn']
 )
