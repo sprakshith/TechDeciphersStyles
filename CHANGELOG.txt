@@ -19,4 +19,4 @@ Change Log
 
 0.0.5 (25-04-2021)
 ------------------
-- Added New Theme 'Dark Matter'
+- Added New Themes 'Dark Matter', 'Genus Lavendula' and 'Gray Area'.

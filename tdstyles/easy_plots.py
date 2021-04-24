@@ -26,7 +26,7 @@ def vertical_descriptive_plot(figsize=(6, 8), plots=3, plot_height=0.5, plot_wid
     if background_color is None:
         background_color = style_css.get_background_color()
 
-    fig = plt.figure(figsize=figsize, facecolor='#fbfbfb')
+    fig = plt.figure(figsize=figsize, facecolor=background_color)
     axes = []
 
     initial_axis = 0
@@ -58,7 +58,7 @@ def horizontal_descriptive_plot(figsize=(8, 6), plots=3, plot_height=0.75, line_
     if background_color is None:
         background_color = style_css.get_background_color()
 
-    fig = plt.figure(figsize=figsize, facecolor='#fbfbfb')
+    fig = plt.figure(figsize=figsize, facecolor=background_color)
     axes = []
 
     initial_axis = 0

@@ -7,11 +7,12 @@ current_theme = 'gray_area'
 
 
 def load_css(theme=None):
+    global current_theme
+
     response_main = req.urlopen(
         'https://raw.githubusercontent.com/sprakshith/TechDeciphersStyles/main/static/main.css')
 
     if theme == 'cyan_sisters':
-        global current_theme
         current_theme = 'cyan_sisters'
 
         response_theme = req.urlopen(
@@ -20,7 +21,6 @@ def load_css(theme=None):
         return HTML('<style>' + response_main.read().decode('utf-8') +
                     response_theme.read().decode('utf-8') + '</style>')
     elif theme == 'dark_matter':
-        global current_theme
         current_theme = 'dark_matter'
 
         response_theme = req.urlopen(
@@ -29,7 +29,6 @@ def load_css(theme=None):
         return HTML('<style>' + response_main.read().decode('utf-8') +
                     response_theme.read().decode('utf-8') + '</style>')
     elif theme == 'genus_lavandula':
-        global current_theme
         current_theme = 'genus_lavandula'
 
         response_theme = req.urlopen(
@@ -38,7 +37,6 @@ def load_css(theme=None):
         return HTML('<style>' + response_main.read().decode('utf-8') +
                     response_theme.read().decode('utf-8') + '</style>')
     else:
-        global current_theme
         current_theme = 'gray_area'
 
         response_theme = req.urlopen(
@@ -68,3 +66,18 @@ def get_background_color():
         return '#e9d5eb'
     else:
         return '#CFD8DC'
+
+
+def get_font_color():
+    if current_theme == 'cyan_sisters':
+        return '#39ace7'
+    elif current_theme == 'dark_matter':
+        return '#757575'
+    elif current_theme == 'genus_lavandula':
+        return '#a176c6'
+    else:
+        return '#78909C'
+
+
+def get_font_dict(fontsize=14, fontweight='light'):
+    return {'fontsize': fontsize, 'fontweight': fontweight, 'fontfamily': 'serif', 'color': get_font_color()}
