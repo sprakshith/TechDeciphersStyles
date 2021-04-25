@@ -17,6 +17,10 @@ div.inner_cell, div.jp-MarkdownOutput {
     vertical-align: middle;
 }
 
+.output_png img {
+    border-radius: 10px;
+}
+
 h1.content-header, h2.content-header, h3.content-header, h4.content-header {
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
