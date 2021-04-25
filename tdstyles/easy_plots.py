@@ -16,7 +16,7 @@ def descriptive_plot(figsize=(8, 6), line_pos_x_axis=1, background_color=None):
                         color='black', lw=0.4)
     fig.lines.extend([line])
 
-    return ax
+    return fig, ax
 
 
 def vertical_descriptive_plot(figsize=(6, 8), plots=3, plot_height=0.5, plot_width=0.75, background_color=None):
@@ -41,7 +41,7 @@ def vertical_descriptive_plot(figsize=(6, 8), plots=3, plot_height=0.5, plot_wid
                         figure=fig, color='black', lw=0.4)
     fig.lines.extend([line])
 
-    return axes
+    return fig, axes
 
 
 def horizontal_descriptive_plot(figsize=(8, 6), plots=3, plot_height=0.75, line_pos_y_axis=-0.1,
@@ -73,4 +73,4 @@ def horizontal_descriptive_plot(figsize=(8, 6), plots=3, plot_height=0.75, line_
                         figure=fig, color='black', lw=0.4)
     fig.lines.extend([line])
 
-    return axes
+    return fig, axes

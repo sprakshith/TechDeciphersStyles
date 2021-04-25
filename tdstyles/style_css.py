@@ -7,6 +7,9 @@ current_theme = 'gray_area'
 
 
 def load_css(theme=None):
+    """
+    Four themes available right now: 'cyan_sisters', 'dark_matter', 'genus_lavandula' and 'gray_area'.
+    """
     global current_theme
 
     response_main = req.urlopen(
@@ -46,12 +49,12 @@ def load_css(theme=None):
                     response_theme.read().decode('utf-8') + '</style>')
 
 
-def get_color_palette(theme=None):
-    if theme == 'cyan_sisters':
+def get_color_palette():
+    if current_theme == 'cyan_sisters':
         return sns.color_palette(['#39ace7', '#0784b5'])
-    elif theme == 'dark_matter':
+    elif current_theme == 'dark_matter':
         return sns.color_palette(['#757575', '#212121'])
-    elif theme == 'genus_lavandula':
+    elif current_theme == 'genus_lavandula':
         return sns.color_palette(['#a176c6', '#8653af'])
     else:
         return sns.color_palette(['#78909C', '#37474F'])
@@ -80,4 +83,10 @@ def get_font_color():
 
 
 def get_font_dict(fontsize=14, fontweight='light'):
-    return {'fontsize': fontsize, 'fontweight': fontweight, 'fontfamily': 'serif', 'color': get_font_color()}
+    return {
+                'fontsize': fontsize,
+                'fontweight': fontweight,
+                'fontfamily': 'serif',
+                'horizontalalignment': 'center',
+                'color': get_font_color()
+            }
