@@ -10,6 +10,13 @@ div.inner_cell, div.jp-MarkdownOutput {
     font-family: 'Arvo', serif !important;
 }
 
+/* Matplotlib Figure to Centre */
+.output_png {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
 h1.content-header, h2.content-header, h3.content-header, h4.content-header {
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
