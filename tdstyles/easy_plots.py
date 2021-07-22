@@ -15,7 +15,7 @@ class EasyPlot:
         else:
             self.style_notebook = StyleNotebook()
 
-    def descriptive_plot(self, figsize=(8, 6), line_pos_x_axis=1, background_color=None):
+    def descriptive_plot(self, figsize=(8, 6), draw_line=False, line_pos_x_axis=1, background_color=None):
 
         if background_color is None:
             background_color = self.style_notebook.get_background_color()
@@ -24,14 +24,15 @@ class EasyPlot:
 
         ax.set_facecolor(background_color)
 
-        line = lines.Line2D([line_pos_x_axis, line_pos_x_axis], [0, 1], transform=fig.transFigure, figure=fig,
-                            color='black', lw=0.4)
-        fig.lines.extend([line])
+        if draw_line:
+            line = lines.Line2D([line_pos_x_axis, line_pos_x_axis], [0, 1], transform=fig.transFigure, figure=fig,
+                                color='black', lw=0.4)
+            fig.lines.extend([line])
 
         return fig, ax
 
     def vertical_descriptive_plot(self, figsize=(6, 8), plots=3, plot_height=0.5, plot_width=0.75,
-                                  background_color=None):
+                                  background_color=None, draw_line=False):
         if plot_width > 1.4:
             raise Exception('Plot width cannot be greater than 1.5')
 
@@ -48,15 +49,16 @@ class EasyPlot:
             axes.append(axis)
             initial_axis += plot_height + 0.1
 
-        line_length = (plot_height + 0.1) * plots
-        line = lines.Line2D([plot_width + 0.1, plot_width + 0.1], [0 - 0.1, line_length], transform=fig.transFigure,
-                            figure=fig, color='black', lw=0.4)
-        fig.lines.extend([line])
+        if draw_line:
+            line_length = (plot_height + 0.1) * plots
+            line = lines.Line2D([plot_width + 0.1, plot_width + 0.1], [0 - 0.1, line_length], transform=fig.transFigure,
+                                figure=fig, color='black', lw=0.4)
+            fig.lines.extend([line])
 
         return fig, axes
 
-    def horizontal_descriptive_plot(self, figsize=(8, 6), plots=3, plot_height=0.75, line_pos_y_axis=-0.1,
-                                    background_color=None):
+    def horizontal_descriptive_plot(self, figsize=(8, 6), plots=3, plot_height=0.75, draw_line=False,
+                                    line_pos_y_axis=-0.1, background_color=None):
         if plots not in [2, 3, 4]:
             raise Exception('Number of plots must be 2, 3 or 4')
 
@@ -79,9 +81,10 @@ class EasyPlot:
             axes.append(axis)
             initial_axis += increment[plots]
 
-        line_length = increment[plots] * (plots - 1) + plot_width[plots]
-        line = lines.Line2D([0 - 0.1, line_length + 0.1], [line_pos_y_axis, line_pos_y_axis], transform=fig.transFigure,
-                            figure=fig, color='black', lw=0.4)
-        fig.lines.extend([line])
+        if draw_line:
+            line_length = increment[plots] * (plots - 1) + plot_width[plots]
+            line = lines.Line2D([0 - 0.1, line_length + 0.1], [line_pos_y_axis, line_pos_y_axis],
+                                transform=fig.transFigure, figure=fig, color='black', lw=0.4)
+            fig.lines.extend([line])
 
         return fig, axes
