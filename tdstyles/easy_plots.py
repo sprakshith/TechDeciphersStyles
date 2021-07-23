@@ -1,7 +1,21 @@
 import matplotlib.pyplot as plt
 import matplotlib.lines as lines
+from matplotlib.axes import Axes
 from tdstyles.style_css import StyleNotebook
-from tdstyles.exceptions import NotStyleNotebook
+from tdstyles.exceptions import NotStyleNotebook, NotAnAxisObject
+
+
+def check_grid_line_dictionary(dictionary):
+    if dictionary.get('colors') is None:
+        dictionary['color'] = 'black'
+    if dictionary.get('linestyle') is None:
+        dictionary['linestyle'] = 'dashed'
+    if dictionary.get('linewidth') is None:
+        dictionary['linewidth'] = 1
+    if dictionary.get('alpha') is None:
+        dictionary['alpha'] = 1
+
+    return dictionary
 
 
 class EasyPlot:
@@ -88,3 +102,129 @@ class EasyPlot:
             fig.lines.extend([line])
 
         return fig, axes
+
+
+class StyleAxis:
+    def __init__(self, axis):
+        if not isinstance(axis, Axes):
+            raise NotAnAxisObject(f"Expected an {Axes} Object instead got {type(axis)} Object")
+
+        self.axis = axis
+
+    def despine_axis(self, *args):
+        if len(args) == 0:
+            args = ['top', 'right']
+        if len(args) <= 4:
+            for side in args:
+                if side not in ['top', 'bottom', 'left', 'right']:
+                    raise Exception(f"Only ['top', 'bottom', 'left', 'right'] are allowed in list. But got {side}.")
+
+            if 'top' in args:
+                self.axis.spines['top'].set_visible(False)
+            if 'bottom' in args:
+                self.axis.spines['bottom'].set_visible(False)
+            if 'left' in args:
+                self.axis.spines['left'].set_visible(False)
+            if 'right' in args:
+                self.axis.spines['right'].set_visible(False)
+        else:
+            raise Exception(f"'despine_axis' requires a minimum of 1 and maximum of 4 elements in the list. But got "
+                            f"{len(args)} instead.")
+
+    def alter_axis_spine(self, spines=None, color=None, linewidth=None):
+        if spines is None:
+            spines = ['left', 'bottom']
+
+        if not isinstance(spines, str) and not isinstance(spines, list):
+            raise Exception(f"'spines' argument takes either a string or list of strings as spines."
+                            f"Example: 'top' or ['left', 'right']")
+
+        if isinstance(spines, str):
+            string_spine = spines
+            spines = list()
+            spines.append(string_spine)
+
+        for spine in spines:
+            if spine not in ['top', 'bottom', 'left', 'right']:
+                raise Exception(f"Only 'top', 'bottom', 'left' or 'right' are allowed. But got '{spine}'.")
+            if color is None and linewidth is None:
+                raise Exception("At least Need color or linewidth parameter to bring change to the axis.")
+            if color:
+                self.axis.spines[spine].set_color(color)
+            if linewidth:
+                self.axis.spines[spine].set_linewidth(linewidth)
+
+    def draw_grid_lines(self, x_axis=False, y_axis=True, x_axis_dict=None, y_axis_dict=None):
+        if x_axis or y_axis:
+            self.axis.set_axisbelow(True)
+            if x_axis:
+                if x_axis_dict is None:
+                    x_axis_dict = {'color': 'white', 'linestyle': 'dashed', 'linewidth': 1, 'alpha': 1}
+                x_axis_dict = check_grid_line_dictionary(x_axis_dict)
+                self.axis.xaxis.grid(color=x_axis_dict.get('color'), linestyle=x_axis_dict.get('linestyle'),
+                                     linewidth=x_axis_dict.get('linewidth'), alpha=x_axis_dict.get('alpha'))
+            if y_axis:
+                if y_axis_dict is None:
+                    y_axis_dict = {'color': 'white', 'linestyle': 'dashed', 'linewidth': 1, 'alpha': 1}
+                y_axis_dict = check_grid_line_dictionary(y_axis_dict)
+                self.axis.yaxis.grid(color=y_axis_dict.get('color'), linestyle=y_axis_dict.get('linestyle'),
+                                     linewidth=y_axis_dict.get('linewidth'), alpha=y_axis_dict.get('alpha'))
+
+    def alter_axis_ticks(self, axis='both', **kwargs):
+        """
+        Change the appearance of ticks, tick labels, and gridlines.
+
+        Tick properties that are not explicitly set using the keyword
+        arguments remain unchanged unless *reset* is True.
+
+        Parameters
+        ----------
+        axis : {'x', 'y', 'both'}, default: 'both'
+            The axis to which the parameters are applied.
+
+        Other Parameters
+        ----------------
+        direction : {'in', 'out', 'inout'}
+            Puts ticks inside the axes, outside the axes, or both.
+        length : float
+            Tick length in points.
+        width : float
+            Tick width in points.
+        color : color
+            Tick color.
+        pad : float
+            Distance in points between tick and label.
+        labelsize : float or str
+            Tick label font size in points or as a string (e.g., 'large').
+        labelcolor : color
+            Tick label color.
+        colors : color
+            Tick color and label color.
+        zorder : float
+            Tick and label zorder.
+        bottom, top, left, right : bool
+            Whether to draw the respective ticks.
+        labelbottom, labeltop, labelleft, labelright : bool
+            Whether to draw the respective tick labels.
+        labelrotation : float
+            Tick label rotation
+        grid_color : color
+            Gridline color.
+        grid_alpha : float
+            Transparency of gridlines: 0 (transparent) to 1 (opaque).
+        grid_linewidth : float
+            Width of gridlines in points.
+        grid_linestyle : str
+            Any valid `.Line2D` line style spec.
+
+        Examples
+        --------
+        ax.tick_params(direction='out', length=6, width=2, colors='r',
+                       grid_color='r', grid_alpha=0.5)
+
+        This will make all major ticks be red, pointing out of the box,
+        and with dimensions 6 points by 2 points.  Tick labels will
+        also be red.  Gridlines will be red and translucent.
+        """
+
+        self.axis.tick_params(axis=axis, **kwargs)

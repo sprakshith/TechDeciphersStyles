@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
     name='tdstyles',
-    version='0.0.7',
+    version='0.0.8',
     description='A python package which helps in customizing a jupyter notebook with very less effort.',
     long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
     url='https://sprakshith.pythonanywhere.com/',

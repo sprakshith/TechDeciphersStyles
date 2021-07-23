@@ -28,3 +28,7 @@ Change Log
 0.0.7 (10-07-2021)
 ------------------
 - Added dynamic_colors theme for better control over the colors.
+
+0.0.8 (24-07-2021)
+------------------
+- Adding Style and Creating Plots are more flexible now.

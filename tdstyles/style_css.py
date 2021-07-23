@@ -114,6 +114,7 @@ class StyleNotebook:
             'fontsize': fontsize,
             'fontweight': fontweight,
             'fontfamily': 'serif',
+            'verticalalignment': 'center',
             'horizontalalignment': 'center',
             'color': font_color
         }
