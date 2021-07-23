@@ -11,11 +11,13 @@ div.inner_cell, div.jp-MarkdownOutput {
 }
 
 /* Matplotlib Figure to Centre */
+/* 
 .output_png {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
 }
+*/
 
 .output_png img {
     border-radius: 10px;
